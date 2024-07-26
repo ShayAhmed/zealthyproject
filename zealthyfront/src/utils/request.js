@@ -3,13 +3,13 @@
 import { API_URL } from './constants';
 
 export const postNewTicket = async (username, email, description) => {
-    console.log(username, email, description);
-  
-    try {
-      const response = await fetch(`${API_URL}/tickets`,{
-        method:'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({'username':username, 'email': email, 'description': description})
+  console.log(username, email, description);
+
+  try {
+    const response = await fetch(`${API_URL}/tickets`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 'username': username, 'email': email, 'description': description })
     });
     return response.status;
     //axios.post(`${API_URL}/tickets`, { name, email, description });
@@ -21,9 +21,9 @@ export const postNewTicket = async (username, email, description) => {
 
 export const fetchTicketsData = async (pageNumber) => {
   try {
-    const response = await fetch(`${API_URL}/tickets`,{
-            method:'GET',
-        })
+    const response = await fetch(`${API_URL}/tickets`, {
+      method: 'GET',
+    })
     return await response.json();
     // const response = await axios.get(`${API_URL}/api/tickets?page=${pageNumber}&per_page=10`);
     // return response;
@@ -35,9 +35,9 @@ export const fetchTicketsData = async (pageNumber) => {
 
 export const fetchTicketsById = async (id) => {
   try {
-    const response = await fetch(`${API_URL}/tickets/${id}`,{
-            method:'GET',
-        })
+    const response = await fetch(`${API_URL}/tickets/${id}`, {
+      method: 'GET',
+    })
     return await response.json();
     // const response = await axios.get(`${API_URL}/api/tickets?page=${pageNumber}&per_page=10`);
     // return response;
@@ -49,12 +49,12 @@ export const fetchTicketsById = async (id) => {
 
 export const updateTicket = async (id, admin_comment, ticket_status) => {
   try {
-    const response = await fetch(`${API_URL}/tickets`,{
-      method:'PATCH',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({'id':id, 'admin_comment': admin_comment, 'ticket_status': ticket_status})
-  })
-  return await response.json()
+    const response = await fetch(`${API_URL}/tickets`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 'id': id, 'admin_comment': admin_comment, 'ticket_status': ticket_status })
+    })
+    return await response.json()
     // const response = await axios.get(`${API_URL}/api/tickets?page=${pageNumber}&per_page=10`);
     // return response;
   } catch (error) {

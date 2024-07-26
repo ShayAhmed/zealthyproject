@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Badge, Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Alert, Badge, Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { updateTicket } from '../../utils/request';
 import { Ticket } from '../../utils/Ticket';
 import React from 'react';
+import { alertFailedText, alertSuccessEmailText, alertSuccessText } from '../../utils/constants';
 
 
 
@@ -23,18 +24,11 @@ const TicketItem = (props: any) => {
     const [updated_ticket, setUpdated_ticket] = useState(temoraryTicket);
     const [commentError, setCommentError] = useState<string | null>(null)
     const [statusError, setStatusError] = useState<string | null>(null)
-
-
-    // useEffect(() => {
-    //     console.log(props.ticket_data.desrciption)
-    // }, []);
+    const [alert, setAlert] = useState('')
 
 
     const addText = () => {
         setOpen(!open);
-        console.log(props.ticket_data.id);
-        console.log(comment);
-        console.log(status);
     }
 
     const getColor = (status: string) => {
@@ -81,18 +75,14 @@ const TicketItem = (props: any) => {
         try {
             var response = await updateTicket(props.ticket_data.id, comment, status)
             setUpdated_ticket(response);
+            setAlert(alertSuccessEmailText)
             console.log(response);
-
-            //setSnackMessage('Ticket submitted successfully.');
-
         } catch (error) {
             console.error('Error submitting ticket:', error);
-            //setSnackMessage('Error submitting ticket.');
+            setAlert(alertFailedText);
         }
-        //setOpenSnack(true);
         setCommentHistory([...commentHistory, comment]);
         setComment('');
-        setOpen(false);
     };
 
     return (
@@ -115,15 +105,19 @@ const TicketItem = (props: any) => {
 
             {open &&
                 <Col>
-                    <Row className='mt-2 mb-2'>
+                    <Row className='mt-3 mb-3'>
                         <Col>
-                            <Form.Label>{props.ticket_data.username}'s description</Form.Label>
-                            <Form.Control type="text" placeholder={props.ticket_data.desrciption} readOnly />
+                            <Card bg='light'>
+                                <Card.Header as="h5">{props.ticket_data.username}'s comment</Card.Header>
+                                <Card.Body>
+                                    <Card.Text>{props.ticket_data.desrciption}</Card.Text>
+                                </Card.Body>
+                            </Card>
                         </Col>
                     </Row>
                     <Row className='mt-2 mb-2'>
                         <Col xs={8}>
-                            <Form.Label>Leave a comment for {props.ticket_data.username}</Form.Label>
+                            <Form.Label><h5>Leave a comment for {props.ticket_data.username}</h5></Form.Label>
                             <Form.Control
                                 as="textarea"
                                 style={{ height: '100px' }}
@@ -143,13 +137,17 @@ const TicketItem = (props: any) => {
                             <Row >
                                 <Button className='d-grid gap-2 mt-2' onClick={(e) => handleSubmit(e)}>Submit</Button>
                             </Row>
-
                         </Col>
-
                     </Row>
+                    <Col className='mt-4'>
+                        {alert !== '' ?
+                            <Alert key={alert === alertSuccessEmailText ? 'success' : 'danger'} variant={alert === alertSuccessEmailText ? 'success' : 'danger'}>
+                                {alert}
+                            </Alert>
+                            : null
+                        }</Col>
                 </Col>
             }
-
         </Container>
     )
 }
