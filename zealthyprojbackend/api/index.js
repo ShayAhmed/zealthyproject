@@ -3,7 +3,10 @@ import { getTickets, getTicketById, createTicket, updateTicket } from '../databa
 import cors from 'cors';
 
 const app = express();
-app.use(cors());
+let corsOptions = {
+    origin : ['https://zealthyproject-67yl.vercel.app','http://localhost:3000'],
+ }
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get('/', (req, res) => {
