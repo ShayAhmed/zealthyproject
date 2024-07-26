@@ -6,7 +6,7 @@ const app = express();
 let corsOptions = {
     origin : ['https://zealthyproject-67yl.vercel.app','http://localhost:3000'],
  }
-app.use(cors(corsOptions));
+app.use(cors({origin:true,credentials: true}));
 app.use(express.json());
 
 app.get('/', (req, res) => {
