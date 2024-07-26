@@ -1,50 +1,52 @@
-import mysql from 'mysql2';
+//import mysql from 'mysql2';
 
+import pg from 'pg';
+const { Pool } = pg;
 import dotenv from 'dotenv';
 dotenv.config();
 
-const pool = mysql.createPool({
-    host: process.env.MYSQL_HOST,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE
-}).promise();
+// const pool = mysql.createPool({
+//     host: process.env.MYSQL_HOST,
+//     user: process.env.MYSQL_USER,
+//     password: process.env.MYSQL_PASSWORD,
+//     database: process.env.MYSQL_DATABASE
+// }).promise();
 
+const pools = new Pool({
+    user: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
+    host: process.env.POSTGRES_HOST,
+    port: 5432, // default Postgres port
+    database: process.env.POSTGRES_DATABASE
+  });
+
+console.log(process.env.POSTGRES_USER)
 
 export async function getTickets(){
-    const [result] = await pool.query("select * from tickets");
-    return result
+    const result = await pools.query("select * from tickets");
+    return result.rows;
 }
 
 export async function getTicketById(id) {
-    const [result] = await pool.query(`
-        select * from tickets where id=?
+    const result = await pools.query(`
+        select * from tickets where id = $1
         `, [id]);
-    return result[0]
+    return result.rows[0]
 }
 
 export async function createTicket(name, email, description) {
-    const [result] = await pool.query(`
+    const result = await pools.query(`
         insert into tickets (username, email, desrciption, ticket_status)
-        values (?,?,?,?) 
+        values ($1,$2,$3,$4) returning *
         `, [name, email, description, 'New']);
-    
-    const id= result.insertId;
-    return getTicketById(id);
+    return result.rows[0];
 }
 
 export async function updateTicket(id, comment, status) {
-    const [result] = await pool.query(`
+    const result = await pools.query(`
         update tickets
-        set admin_comment = ?, ticket_status=?
-        where id=?
+        set admin_comment = $1, ticket_status=$2
+        where id=$3 returning *
         `, [comment, status, id]);
-    return getTicketById(id);
+    return result.rows[0];
 }
-
-// const tickets = await getTickets();
-// const t = await getTicketById(100);
-// const add = await createTicket('jim', 'jim@gmail.com', 'descruption')
-// console.log(tickets);
-// console.log(t);
-// console.log(add);

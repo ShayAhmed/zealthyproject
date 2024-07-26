@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { Badge, Button, Col, Container, Dropdown, Form, ListGroupItem, Row } from "react-bootstrap";
+import { Badge, Button, Col, Container, Form, Row } from "react-bootstrap";
 import { updateTicket } from '../../utils/request';
 import { Ticket } from '../../utils/Ticket';
-import { useEffect } from 'react';
 import React from 'react';
 
 
@@ -13,7 +12,8 @@ const TicketItem = (props: any) => {
         ticket_status: '',
         username: '',
         admin_comment: '',
-        email: ''
+        email: '',
+        created: ''
     }
 
     const [open, setOpen] = useState(false);
@@ -25,9 +25,9 @@ const TicketItem = (props: any) => {
     const [statusError, setStatusError] = useState<string | null>(null)
 
 
-    useEffect(() => {
-        console.log(props.ticket_data.desrciption)
-    }, []);
+    // useEffect(() => {
+    //     console.log(props.ticket_data.desrciption)
+    // }, []);
 
 
     const addText = () => {
@@ -119,13 +119,6 @@ const TicketItem = (props: any) => {
                         <Col>
                             <Form.Label>{props.ticket_data.username}'s description</Form.Label>
                             <Form.Control type="text" placeholder={props.ticket_data.desrciption} readOnly />
-                            {updated_ticket.admin_comment == '' ?  null : <Form.Label>Your most recent comment</Form.Label>}
-                            <div>
-                                {updated_ticket.admin_comment === '' ? null
-                                :<Form.Control type="text" className='mt-1 mb-1' placeholder={updated_ticket.admin_comment} readOnly />
-                                }
-                            </div>
-                            
                         </Col>
                     </Row>
                     <Row className='mt-2 mb-2'>

@@ -1,12 +1,13 @@
-CREATE DATABASE if not exists tickets_app;
+CREATE DATABASE if NOT exists tickets_app;
 USE tickets_app;
 
-CREATE TABLE if not exists tickets (
+CREATE TABLE tickets (
   id integer PRIMARY KEY AUTO_INCREMENT,
   username VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   desrciption VARCHAR(255) NOT NULL,
   ticket_status VARCHAR(255) NOT NULL,
+  admin_comment VARCHAR(255),
   created TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
