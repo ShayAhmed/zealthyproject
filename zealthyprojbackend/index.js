@@ -3,8 +3,8 @@ import { getTickets, getTicketById, createTicket, updateTicket } from '../databa
 import cors from 'cors';
 
 const app = express();
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send('Hello World')
@@ -47,6 +47,3 @@ app.use((err, req, res, next) => {
 app.listen(8080, () => {
     console.log('Running on 8080');
 })  
-
-app.use(express.json());
-app.use(cors());
