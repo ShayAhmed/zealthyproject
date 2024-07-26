@@ -108,7 +108,7 @@ const TicketItem = (props: any) => {
                 <Col>
                     <Row className='mt-3 mb-3'>
                         <Col>
-                            <Card bg='light'>
+                            <Card bg='light' key='Light'>
                                 <Card.Header as="h5">{props.ticket_data.username}'s comment</Card.Header>
                                 <Card.Body>
                                     <Card.Text>{props.ticket_data.desrciption}</Card.Text>
@@ -143,7 +143,7 @@ const TicketItem = (props: any) => {
                     <Col className='mt-4'>
                         {alert !== '' ?
                             <Alert key={alert === alertSuccessEmailText ? 'success' : 'danger'} variant={alert === alertSuccessEmailText ? 'success' : 'danger'}>
-                                {alert}
+                                {alert} to {props.ticket_data.username}
                             </Alert>
                             : null
                         }</Col>
