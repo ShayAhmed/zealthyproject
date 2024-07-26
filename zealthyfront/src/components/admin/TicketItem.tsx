@@ -3,7 +3,7 @@ import { Alert, Badge, Button, Card, Col, Container, Form, Row } from "react-boo
 import { updateTicket } from '../../utils/request';
 import { Ticket } from '../../utils/Ticket';
 import React from 'react';
-import { alertFailedText, alertSuccessEmailText, alertSuccessText } from '../../utils/constants';
+import { alertFailedText, alertSuccessEmailText } from '../../utils/constants';
 
 
 

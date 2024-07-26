@@ -1,16 +1,7 @@
-//import mysql from 'mysql2';
-
 import pg from 'pg';
 const { Pool } = pg;
 import dotenv from 'dotenv';
 dotenv.config();
-
-// const pool = mysql.createPool({
-//     host: process.env.MYSQL_HOST,
-//     user: process.env.MYSQL_USER,
-//     password: process.env.MYSQL_PASSWORD,
-//     database: process.env.MYSQL_DATABASE
-// }).promise();
 
 const pools = new Pool({
     user: process.env.POSTGRES_USER,
