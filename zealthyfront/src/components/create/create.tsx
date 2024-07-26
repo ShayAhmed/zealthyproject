@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Alert, Button, Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { postNewTicket } from '../../utils/request';
 import { alertFailedText, alertSuccessText } from '../../utils/constants';
+import LocalizedText from '../../languages/en.json';
 
 const Create = () => {
     const [username, setUsername] = React.useState('');
@@ -78,7 +79,7 @@ const Create = () => {
             }
             <Row>
                 <Col className='mt-2 mb-2' xs={{ span: 6, offset: 3 }}>
-                    <h1 className='text-center'>Create a ticket</h1>
+                    <h1 className='text-center'>{LocalizedText.createTicket}</h1>
                 </Col>
             </Row>
             <Row>
@@ -88,7 +89,7 @@ const Create = () => {
                             <Form.Group className="mb-3" controlId="formBasicText">
                                 <Form.Label><h5>Name</h5></Form.Label>
                                 <Form.Control type="text" placeholder="Enter Name" onChange={(e) => setUsername(e.target.value)} />
-                                {usernameError === 'empty' ? <Form.Label className='text-danger'> Enter your name</Form.Label> : null}
+                                {usernameError === 'empty' ? <Form.Label className='text-danger'> {LocalizedText.create_EnterName}</Form.Label> : null}
                             </Form.Group>
                         </Row>
 
@@ -98,7 +99,7 @@ const Create = () => {
                                 <Form.Control type="email" placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)} />
                                 <Form.Text className="text-muted">
                                 </Form.Text>
-                                {emailError === 'empty' ? <Form.Label className='text-danger'> Enter your email</Form.Label> : null}
+                                {emailError === 'empty' ? <Form.Label className='text-danger'> {LocalizedText.create_EnterEmail}</Form.Label> : null}
 
                             </Form.Group>
 
@@ -112,7 +113,7 @@ const Create = () => {
                                     style={{ height: '100px' }}
                                     onChange={(e) => setDescription(e.target.value)}
                                 />
-                                {desciptionError === 'empty' ? <Form.Label className='text-danger'> Enter a description</Form.Label> : null}
+                                {desciptionError === 'empty' ? <Form.Label className='text-danger'> {LocalizedText.create_EnterDescription}</Form.Label> : null}
                             </Form.Group>
                         </Row>
                         <Row className='me-auto ms-auto'>

@@ -1,0 +1,12 @@
+{
+    "mainPage_title": "Welcome!",
+    "mainPage_text": "Welcome to the helpdesk. Click a button below to begin.",
+    "createTicket": "Create Ticket",
+    "adminConsole": "Admin Console",
+    "helpDesk": "Help Desk",
+    "create_EnterDescription":"Enter a description",
+    "create_EnterName":"Enter your name",
+    "create_EnterEmail":"Enter your email",
+    "creat_createTicket": "Create a ticket"
+
+}
