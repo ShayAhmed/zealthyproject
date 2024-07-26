@@ -17,7 +17,8 @@ const pools = new Pool({
     password: process.env.POSTGRES_PASSWORD,
     host: process.env.POSTGRES_HOST,
     port: 5432, // default Postgres port
-    database: process.env.POSTGRES_DATABASE
+    database: process.env.POSTGRES_DATABASE,
+    ssl:true
   });
 
 console.log(process.env.POSTGRES_USER)
