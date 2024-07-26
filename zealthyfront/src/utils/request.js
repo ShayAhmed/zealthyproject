@@ -8,7 +8,13 @@ export const postNewTicket = async (username, email, description) => {
   try {
     const response = await fetch(`${API_URL}/tickets`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+
+      },
       body: JSON.stringify({ 'username': username, 'email': email, 'description': description })
     });
     return response.status;
@@ -23,6 +29,12 @@ export const fetchTicketsData = async (pageNumber) => {
   try {
     const response = await fetch(`${API_URL}/tickets`, {
       method: 'GET',
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+
+      }
     })
     return await response.json();
     // const response = await axios.get(`${API_URL}/api/tickets?page=${pageNumber}&per_page=10`);
@@ -37,6 +49,12 @@ export const fetchTicketsById = async (id) => {
   try {
     const response = await fetch(`${API_URL}/tickets/${id}`, {
       method: 'GET',
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+
+      }
     })
     return await response.json();
     // const response = await axios.get(`${API_URL}/api/tickets?page=${pageNumber}&per_page=10`);
@@ -51,7 +69,13 @@ export const updateTicket = async (id, admin_comment, ticket_status) => {
   try {
     const response = await fetch(`${API_URL}/tickets`, {
       method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+
+      },
       body: JSON.stringify({ 'id': id, 'admin_comment': admin_comment, 'ticket_status': ticket_status })
     })
     return await response.json()
@@ -62,31 +86,3 @@ export const updateTicket = async (id, admin_comment, ticket_status) => {
     throw error;
   }
 };
-
-// export const fetchTicketDetails = async (ticketId) => {
-//   try {
-//     const response = await axios.get(`${API_URL}/api/tickets/${ticketId}`);
-//     return response;
-//   } catch (error) {
-//     console.error('Error fetching ticket details:', error);
-//     throw error;
-//   }
-// };
-
-// export const updateTicketStatus = async (ticketId, newStatus) => {
-//   try {
-//     await axios.put(`${API_URL}/api/tickets/${ticketId}/status`, { status: newStatus });
-//   } catch (error) {
-//     console.error('Error updating status:', error);
-//     throw error;
-//   }
-// };
-
-// export const respondToTicket = async (ticketId, message) => {
-//   try {
-//     await axios.post(`${API_URL}/api/tickets/${ticketId}/respond`, { message });
-//   } catch (error) {
-//     console.error('Error submitting response:', error);
-//     throw error;
-//   }
-// };
