@@ -47,3 +47,6 @@ app.use((err, req, res, next) => {
 app.listen(8080, () => {
     console.log('Running on 8080');
 })  
+
+app.use(express.json());
+app.use(cors());
