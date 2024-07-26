@@ -6,6 +6,9 @@ const app = express();
 app.use(express.json())
 app.use(cors())
 
+app.get('/', (req, res) => {
+    res.send('Hello World')
+  })
 
 app.get('/tickets', async (req, res) => {
     const notes = await getTickets();
