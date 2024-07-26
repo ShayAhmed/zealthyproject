@@ -31,7 +31,7 @@ const Admin = () => {
         <Container className='mt-4'>
             <Row>
                 <Col className='mt-2 mb-2' xs={{ span: 6, offset: 3 }}>
-                    <h1 className='text-center'>Create a ticket</h1>
+                    <h1 className='text-center'>Respond to a ticket</h1>
                 </Col>
             </Row>
             {tickets.map((ticket: Ticket) => (
