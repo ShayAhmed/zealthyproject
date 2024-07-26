@@ -116,7 +116,7 @@ const Create = () => {
                             </Form.Group>
                         </Row>
                         <Row className='me-auto ms-auto'>
-                            <Button variant="primary" type="submit">
+                            <Button style={{ backgroundColor: '#5D3FD3', borderColor:'#5D3FD3' }} type="submit">
                                 Submit
                             </Button>
                         </Row>

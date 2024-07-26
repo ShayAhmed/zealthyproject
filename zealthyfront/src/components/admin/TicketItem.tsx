@@ -126,8 +126,8 @@ const TicketItem = (props: any) => {
                             />
                             {commentError === 'No Comment' ? <Form.Label className='text-danger'> Enter a comment</Form.Label> : null}
                         </Col>
-                        <Col xs={3} className='mt-auto'>
-                            <Row className='mt-2'>
+                        <Col xs={4} className='mt-auto'>
+                            <Row className='mt-2 me-2'>
                                 <Form.Select aria-label="Default select example" onChange={(e) => setStatus(e.target.value)}>
                                     <option>Update Status</option>
                                     <option value="In Progress">In Progress</option>
@@ -135,8 +135,8 @@ const TicketItem = (props: any) => {
                                 </Form.Select>
                                 {statusError === 'No Status' ? <Form.Label className='text-danger'>Select a valid status</Form.Label> : null}
                             </Row>
-                            <Row >
-                                <Button className='d-grid gap-2 mt-2' onClick={(e) => handleSubmit(e)}>Submit</Button>
+                            <Row className='mt-2 me-1'>
+                                <Button style={{ backgroundColor: '#5D3FD3', borderColor:'#5D3FD3' }} className='d-grid gap-2 mt-2' onClick={(e) => handleSubmit(e)}>Submit</Button>
                             </Row>
                         </Col>
                     </Row>

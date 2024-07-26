@@ -7,7 +7,7 @@ const Header = () => {
     navigate(path);
   }
   return (
-    <Navbar bg="primary" data-bs-theme="dark" >
+    <Navbar style={{ backgroundColor: '#5D3FD3' }} data-bs-theme="dark" >
       <Container>
         <Navbar.Brand onClick={() => routeChange('')}>Help Desk</Navbar.Brand>
         <Nav className="me-auto">

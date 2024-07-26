@@ -19,8 +19,8 @@ function App() {
         <div className="col-lg-6 mx-auto">
           <p className="lead mb-4">Welcome to the helpdesk. Click a button below to begin.</p>
           <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <Button type="button" className="btn btn-primary btn-lg px-4 gap-3" onClick={() => routeChange('create')}>Create Ticket</Button>
-            <Button type="button" className="btn btn-primary btn-lg px-4" onClick={() => routeChange('admin')}>Admin Console</Button>
+            <Button type="button"  style={{ backgroundColor: '#5D3FD3', borderColor:'#5D3FD3' }} className="btn btn-lg px-4 gap-3" onClick={() => routeChange('create')}>Create Ticket</Button>
+            <Button type="button" style={{ backgroundColor: '#5D3FD3', borderColor:'#5D3FD3' }} className="btn btn-lg px-4" onClick={() => routeChange('admin')}>Admin Console</Button>
           </div>
         </div>
       </div>
