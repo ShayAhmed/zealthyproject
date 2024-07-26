@@ -3,5 +3,6 @@ export interface Ticket {
     ticket_status: string,
     admin_comment: string,
     email: string,
-    created: string
+    created: string,
+    id: any
 }

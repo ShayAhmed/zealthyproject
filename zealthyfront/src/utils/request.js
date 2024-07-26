@@ -10,9 +10,9 @@ export const postNewTicket = async (username, email, description) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        "Access-Control-Allow-Credentials": "true" ,
+        "Access-Control-Allow-Credentials": "true",
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods" : "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+        "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
         "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
 
       },
@@ -30,9 +30,9 @@ export const fetchTicketsData = async (pageNumber) => {
     const response = await fetch(`${API_URL}/tickets`, {
       method: 'GET',
       headers: {
-       "Access-Control-Allow-Credentials": "true" ,
+        "Access-Control-Allow-Credentials": "true",
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods" : "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+        "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
         "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
 
       }
@@ -49,9 +49,9 @@ export const fetchTicketsById = async (id) => {
     const response = await fetch(`${API_URL}/tickets/${id}`, {
       method: 'GET',
       headers: {
-    "Access-Control-Allow-Credentials": "true" ,
+        "Access-Control-Allow-Credentials": "true",
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods" : "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+        "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
         "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
 
       }
@@ -65,12 +65,13 @@ export const fetchTicketsById = async (id) => {
 
 export const updateTicket = async (id, admin_comment, ticket_status) => {
   try {
-    const response = await fetch(`${API_URL}/tickets`, {
+      const response = await fetch(`${API_URL}/tickets`, {
       method: 'PATCH',
       headers: {
-     "Access-Control-Allow-Credentials": "true" ,
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Credentials": "true",
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods" : "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+        "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
         "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
 
       },

@@ -14,7 +14,8 @@ const TicketItem = (props: any) => {
         username: '',
         admin_comment: '',
         email: '',
-        created: ''
+        created: '',
+        id : null
     }
 
     const [open, setOpen] = useState(false);
