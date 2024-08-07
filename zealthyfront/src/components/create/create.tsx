@@ -15,10 +15,9 @@ const Create = () => {
     const [alert, setAlert] = useState('')
 
     const handleSubmit = async (e: any) => {
-        //e.preventDefault();
+        e.preventDefault();
 
         if (handleError() === true) {
-            console.log('errored')
             setAlert(alertFailedText);
             return;
         }
@@ -26,13 +25,11 @@ const Create = () => {
         e.target.reset();
         setAlert('');
         try {
-            console.log(username);
             await postNewTicket(username, email, description)
                 .then((res) => {
                     if (res === undefined) {
                         console.log('res was undefined')
                     }
-                    console.log(res)
                 })
 
             setUsername('');

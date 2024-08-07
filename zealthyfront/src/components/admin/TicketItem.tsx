@@ -20,7 +20,7 @@ const TicketItem = (props: any) => {
 
     const [open, setOpen] = useState(false);
     const [comment, setComment] = useState('');
-    const [status, setStatus] = useState('');
+    const [status, setStatus] = useState('In Progress');
     const [updated_ticket, setUpdated_ticket] = useState(temoraryTicket);
     const [commentError, setCommentError] = useState<string | null>(null)
     const [statusError, setStatusError] = useState<string | null>(null)
@@ -46,22 +46,24 @@ const TicketItem = (props: any) => {
     }
 
     const handleError = () => {
+        var checkCommentError = false;
+        var checkStatusError = false;
+
         if (comment === '') {
+            checkCommentError = true;
             setCommentError('No Comment');
         } else {
             setCommentError('');
         }
 
         if (status === 'Update Status' || status === '') {
+            checkStatusError = true;
             setStatusError('No Status');
         } else {
             setStatusError('');
         }
 
-        if (commentError !== '' || statusError !== '') {
-            return true;
-        }
-        return false;
+        return checkCommentError || checkStatusError;
     }
 
     const handleSubmit = async (e: any) => {
@@ -124,26 +126,25 @@ const TicketItem = (props: any) => {
                             <Col xs={8}>
                                 <Form.Control
                                     as="textarea"
-                                    style={{ height: '90px' }}
+                                    style={{ height: '120px' }}
                                     onChange={(e) => setComment(e.target.value)}
                                 />
                                 {commentError === 'No Comment' ? <Form.Label className='text-danger d-block mt-2'> Enter a comment</Form.Label> : null}
-                                {statusError === 'No Status' ? <Form.Label className='text-danger d-block mt-2'> Select a valid status</Form.Label> : null}
                             </Col>
                             <Col xs={4}>
-                                <Row className='me-2'>
+                            
+                                <Row className='me-2 d-flex'><Form.Group>
+                                <Form.Label className='d-block'><h5>Update Status</h5></Form.Label>
                                     <Form.Control
                                         as="select"
                                         type='text'
                                         onChange={handleChange}
+                                        defaultValue='In Progress'
                                     >
-                                        <option value="Update Status">Update Status</option>
                                         <option value="In Progress">In Progress</option>
                                         <option value="Resolved">Resolved</option>
                                     </Form.Control>
-                                </Row>
-                                <Row className='mt-2 me-2'>
-                                    <Button style={{ backgroundColor: '#5D3FD3', borderColor: '#5D3FD3' }} className='d-grid gap-2 mt-2' type='submit' onClick={handleSubmit}>Submit</Button>
+                                    <Col className='d-grid gap-2'><Button style={{ backgroundColor: '#5D3FD3', borderColor: '#5D3FD3' }} className='mt-2' type='submit' onClick={handleSubmit}>Submit</Button></Col></Form.Group>
                                 </Row>
                             </Col>
                         </Row>

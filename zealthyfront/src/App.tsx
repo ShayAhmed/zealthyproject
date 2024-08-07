@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Header from './components/header/header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
