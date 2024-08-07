@@ -3,7 +3,7 @@ import { Alert, Badge, Button, Card, Col, Container, Form, Row } from "react-boo
 import { updateTicket } from '../../utils/request';
 import { Ticket } from '../../utils/Ticket';
 import React from 'react';
-import { alertFailedText, alertSuccessEmailText } from '../../utils/constants';
+import { alertFailedEmailText, alertSuccessEmailText } from '../../utils/constants';
 
 
 
@@ -15,7 +15,7 @@ const TicketItem = (props: any) => {
         admin_comment: '',
         email: '',
         created: '',
-        id : null
+        id: null
     }
 
     const [open, setOpen] = useState(false);
@@ -30,6 +30,7 @@ const TicketItem = (props: any) => {
 
     const addText = () => {
         setOpen(!open);
+        setAlert('');
     }
 
     const getColor = (status: string) => {
@@ -59,6 +60,7 @@ const TicketItem = (props: any) => {
         }
 
         if (commentError !== '' || statusError !== '') {
+            console.log(commentError, statusError)
             return true;
         }
         return false;
@@ -68,6 +70,7 @@ const TicketItem = (props: any) => {
         e.preventDefault();
 
         if (handleError() === true) {
+            console.log('returned error');
             return;
         }
 
@@ -80,7 +83,7 @@ const TicketItem = (props: any) => {
             console.log(response);
         } catch (error) {
             console.error('Error submitting ticket:', error);
-            setAlert(alertFailedText);
+            setAlert(alertFailedEmailText);
         }
         setCommentHistory([...commentHistory, comment]);
         setComment('');
@@ -118,29 +121,36 @@ const TicketItem = (props: any) => {
                     </Row>
                     <Row className='mt-2 mb-2'>
                         <Col xs={8}>
-                            <Form.Label><h5>Leave a comment for {props.ticket_data.username}</h5></Form.Label>
+                            <Form.Label className='d-block'><h5>Leave a comment for {props.ticket_data.username}</h5></Form.Label>
                             <Form.Control
                                 as="textarea"
                                 style={{ height: '100px' }}
                                 onChange={(e) => setComment(e.target.value)}
                             />
-                            {commentError === 'No Comment' ? <Form.Label className='text-danger'> Enter a comment</Form.Label> : null}
+                            {commentError === 'No Comment' ? <Form.Label className='text-danger d-block mt-2'> Enter a comment</Form.Label> : null}
+                            {statusError === 'No Status' ? <Form.Label className='text-danger d-block mt-2'> Select a valid status</Form.Label> : null}
                         </Col>
-                        <Col xs={4} className='mt-auto'>
+                        <Col xs={4} className='mt-4'>
                             <Row className='mt-2 me-2'>
-                                <Form.Select aria-label="Default select example" onChange={(e) => setStatus(e.target.value)}>
-                                    <option>Update Status</option>
+                                <Form.Control
+                                    as="select"
+                                    value={status}
+                                    onChange={e => {
+                                        console.log("e.target.value", e.currentTarget.value);
+                                        setStatus(e.currentTarget.value);
+                                    }}
+                                >
+                                    <option value="Update Status">Update Status</option>
                                     <option value="In Progress">In Progress</option>
                                     <option value="Resolved">Resolved</option>
-                                </Form.Select>
-                                {statusError === 'No Status' ? <Form.Label className='text-danger'>Select a valid status</Form.Label> : null}
+                                </Form.Control>
                             </Row>
                             <Row className='mt-2 me-1'>
-                                <Button style={{ backgroundColor: '#5D3FD3', borderColor:'#5D3FD3' }} className='d-grid gap-2 mt-2' onClick={(e) => handleSubmit(e)}>Submit</Button>
+                                <Button style={{ backgroundColor: '#5D3FD3', borderColor: '#5D3FD3' }} className='d-grid gap-2 mt-2' type='submit' onClick={(e) => handleSubmit(e)}>Submit</Button>
                             </Row>
                         </Col>
                     </Row>
-                    <Col className='mt-4'>
+                    <Col className='mt-3'>
                         {alert !== '' ?
                             <Alert key={alert === alertSuccessEmailText ? 'success' : 'danger'} variant={alert === alertSuccessEmailText ? 'success' : 'danger'}>
                                 {alert} to {props.ticket_data.username}

@@ -16,9 +16,10 @@ const Create = () => {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
-        console.log('here');
 
         if (handleError() === true) {
+            console.log('errored')
+            setAlert(alertFailedText);
             return;
         }
 
@@ -48,22 +49,22 @@ const Create = () => {
         if (username === '') {
             setUsernameError('empty');
         } else {
-            setUsernameError('')
+            setUsernameError(null)
         }
 
         if (email === '') {
             setEmailError('empty');
         } else {
-            setEmailError('')
+            setEmailError(null)
         }
 
         if (description === '') {
             setDesciptionError('empty');
         } else {
-            setDesciptionError('')
+            setDesciptionError(null)
         }
 
-        if (usernameError !== '' || emailError !== '' || desciptionError !== '') {
+        if (usernameError !== null || emailError !== null || desciptionError !== null) {
             return true;
         }
         return false;
