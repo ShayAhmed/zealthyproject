@@ -20,7 +20,6 @@ const TicketItem = (props: any) => {
 
     const [open, setOpen] = useState(false);
     const [comment, setComment] = useState('');
-    const [commentHistory, setCommentHistory] = React.useState<string[]>([])
     const [status, setStatus] = useState('');
     const [updated_ticket, setUpdated_ticket] = useState(temoraryTicket);
     const [commentError, setCommentError] = useState<string | null>(null)
@@ -60,7 +59,6 @@ const TicketItem = (props: any) => {
         }
 
         if (commentError !== '' || statusError !== '') {
-            console.log(commentError, statusError)
             return true;
         }
         return false;
@@ -70,7 +68,6 @@ const TicketItem = (props: any) => {
         e.preventDefault();
 
         if (handleError() === true) {
-            console.log('returned error');
             return;
         }
 
@@ -80,14 +77,16 @@ const TicketItem = (props: any) => {
             var response = await updateTicket(props.ticket_data.id, comment, status)
             setUpdated_ticket(response);
             setAlert(alertSuccessEmailText)
-            console.log(response);
         } catch (error) {
-            console.error('Error submitting ticket:', error);
             setAlert(alertFailedEmailText);
         }
-        setCommentHistory([...commentHistory, comment]);
         setComment('');
     };
+
+    const handleChange = (e: any) => {
+        const newValue = e.target.value;
+        setStatus(newValue);
+    }
 
     return (
         <Container className='mt-2 mb-2 border py-2'>
@@ -119,37 +118,36 @@ const TicketItem = (props: any) => {
                             </Card>
                         </Col>
                     </Row>
-                    <Row className='mt-2 mb-2'>
-                        <Col xs={8}>
-                            <Form.Label className='d-block'><h5>Leave a comment for {props.ticket_data.username}</h5></Form.Label>
-                            <Form.Control
-                                as="textarea"
-                                style={{ height: '100px' }}
-                                onChange={(e) => setComment(e.target.value)}
-                            />
-                            {commentError === 'No Comment' ? <Form.Label className='text-danger d-block mt-2'> Enter a comment</Form.Label> : null}
-                            {statusError === 'No Status' ? <Form.Label className='text-danger d-block mt-2'> Select a valid status</Form.Label> : null}
-                        </Col>
-                        <Col xs={4} className='mt-4'>
-                            <Row className='mt-2 me-2'>
+                    <Form>
+                        <Form.Label className='d-block'><h5>Leave a comment for {props.ticket_data.username}</h5></Form.Label>
+                        <Row className='mt-2 mb-2'>
+                            <Col xs={8}>
                                 <Form.Control
-                                    as="select"
-                                    value={status}
-                                    onChange={e => {
-                                        console.log("e.target.value", e.currentTarget.value);
-                                        setStatus(e.currentTarget.value);
-                                    }}
-                                >
-                                    <option value="Update Status">Update Status</option>
-                                    <option value="In Progress">In Progress</option>
-                                    <option value="Resolved">Resolved</option>
-                                </Form.Control>
-                            </Row>
-                            <Row className='mt-2 me-1'>
-                                <Button style={{ backgroundColor: '#5D3FD3', borderColor: '#5D3FD3' }} className='d-grid gap-2 mt-2' type='submit' onClick={(e) => handleSubmit(e)}>Submit</Button>
-                            </Row>
-                        </Col>
-                    </Row>
+                                    as="textarea"
+                                    style={{ height: '90px' }}
+                                    onChange={(e) => setComment(e.target.value)}
+                                />
+                                {commentError === 'No Comment' ? <Form.Label className='text-danger d-block mt-2'> Enter a comment</Form.Label> : null}
+                                {statusError === 'No Status' ? <Form.Label className='text-danger d-block mt-2'> Select a valid status</Form.Label> : null}
+                            </Col>
+                            <Col xs={4}>
+                                <Row className='me-2'>
+                                    <Form.Control
+                                        as="select"
+                                        type='text'
+                                        onChange={handleChange}
+                                    >
+                                        <option value="Update Status">Update Status</option>
+                                        <option value="In Progress">In Progress</option>
+                                        <option value="Resolved">Resolved</option>
+                                    </Form.Control>
+                                </Row>
+                                <Row className='mt-2 me-2'>
+                                    <Button style={{ backgroundColor: '#5D3FD3', borderColor: '#5D3FD3' }} className='d-grid gap-2 mt-2' type='submit' onClick={handleSubmit}>Submit</Button>
+                                </Row>
+                            </Col>
+                        </Row>
+                    </Form>
                     <Col className='mt-3'>
                         {alert !== '' ?
                             <Alert key={alert === alertSuccessEmailText ? 'success' : 'danger'} variant={alert === alertSuccessEmailText ? 'success' : 'danger'}>

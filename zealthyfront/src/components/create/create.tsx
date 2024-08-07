@@ -15,7 +15,7 @@ const Create = () => {
     const [alert, setAlert] = useState('')
 
     const handleSubmit = async (e: any) => {
-        e.preventDefault();
+        //e.preventDefault();
 
         if (handleError() === true) {
             console.log('errored')
